@@ -1,0 +1,64 @@
+<p>
+  models works!
+</p>
+<table id="searchbox">
+  <tr>
+      <td><button mat-button (click)="prev()" [disabled]="this.page < 10">Previous</button></td>
+      <td><button mat-button (click)="next()" [disabled]="this.results.length<10">Next</button></td>
+  </tr>
+  <tr>
+    <td>
+      <mat-form-field>
+        <mat-label>Select a year</mat-label>
+        <mat-select [(value)]="yearselected">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let year of years"  [value]="year">{{
+            year
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field>
+        <mat-label>Select a make</mat-label>
+        <mat-select [(value)]="makeselected">
+          <mat-option>None</mat-option>
+          <mat-option *ngFor="let make of makes" [value]="make">{{
+            make
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </td>
+
+    <td><button mat-button (click)="send()">Submit</button></td>
+
+  </tr>
+
+<!--<tr *ngFor="let entry of results"><td>{{entry.id}}</td><td>{{entry.year}}</td><td>{{entry.make}}</td><td>{{entry.model}}</td><td>{{entry.hasDetails}}</td></tr>
+-->
+
+</table>
+<table  mat-table class="mat-elevation-z8" [dataSource]="results">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef> id </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+  <ng-container matColumnDef="year">
+    <th mat-header-cell *matHeaderCellDef> year </th>
+    <td mat-cell *matCellDef="let element"> {{element.year}} </td>
+  </ng-container>
+  <ng-container matColumnDef="make">
+    <th mat-header-cell *matHeaderCellDef> make </th>
+    <td mat-cell *matCellDef="let element"> {{element.make}} </td>
+  </ng-container>
+  <ng-container matColumnDef="model">
+    <th mat-header-cell *matHeaderCellDef> model </th>
+    <td mat-cell *matCellDef="let element"> {{element.model}} </td>
+  </ng-container>
+  <ng-container matColumnDef="hasDetails">
+    <th mat-header-cell *matHeaderCellDef> hasDetails </th>
+    <td mat-cell *matCellDef="let element"> {{element.hasDetails}} </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColoms"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColoms"></tr>
+</table>
